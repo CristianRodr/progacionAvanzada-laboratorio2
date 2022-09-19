@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  *
  * @author roger
  */
-public class Prestamo {
+public class Prestamo implements Serializable {
     int Identificador;
     LocalDate Fecha_Prestamo;
     LocalDate Fecha_Devolucion;

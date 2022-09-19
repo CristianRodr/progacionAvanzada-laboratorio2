@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
  *
  * @author roger
  */
-public class Autor {
+public class Autor implements Serializable {
     String nombre;
     String nacionalidad;
     LocalDate nacimiento;

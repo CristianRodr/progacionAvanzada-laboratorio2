@@ -57,6 +57,11 @@ public class FPrincipal extends javax.swing.JFrame {
         mBasica.add(miAutor);
 
         miLibro.setText("Libro");
+        miLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLibroActionPerformed(evt);
+            }
+        });
         mBasica.add(miLibro);
 
         mbPrincipal.add(mBasica);
@@ -64,6 +69,11 @@ public class FPrincipal extends javax.swing.JFrame {
         mEjecucion.setText("Ejecucion");
 
         miLector.setText("Lector");
+        miLector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLectorActionPerformed(evt);
+            }
+        });
         mEjecucion.add(miLector);
 
         mbPrincipal.add(mEjecucion);
@@ -128,6 +138,14 @@ public class FPrincipal extends javax.swing.JFrame {
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_miSalirActionPerformed
+
+    private void miLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLibroActionPerformed
+        new Flibro().setVisible(true);
+    }//GEN-LAST:event_miLibroActionPerformed
+
+    private void miLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLectorActionPerformed
+        new FLector().setVisible(true);
+    }//GEN-LAST:event_miLectorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,11 +4,13 @@
  */
 package Clases;
 
+import java.io.Serializable;
+
 /**
  *
  * @author roger
  */
-public class Copia {
+public class Copia implements Serializable{
     int identificador;
     String estado;
     Libro libro;

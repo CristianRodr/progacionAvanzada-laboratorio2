@@ -5,6 +5,12 @@
 package Formas;
 
 import Clases.Autor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -14,6 +20,9 @@ import javax.swing.JOptionPane;
  * @author an1me
  */
 public class FAutor extends javax.swing.JFrame {
+    Autor autor01 = new Autor();
+
+    private Object prueba;
 
     /**
      * Creates new form FAutor
@@ -41,6 +50,7 @@ public class FAutor extends javax.swing.JFrame {
         tfFecha = new javax.swing.JFormattedTextField();
         bGardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        bBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -80,6 +90,13 @@ public class FAutor extends javax.swing.JFrame {
             }
         });
 
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,7 +125,9 @@ public class FAutor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(bGardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
         );
@@ -133,7 +152,8 @@ public class FAutor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bGardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bGardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -149,7 +169,7 @@ public class FAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bGardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGardarActionPerformed
-        Autor autor01 = new Autor();
+        
         LocalDate fecha = LocalDate.parse(tfFecha.getText(), DateTimeFormatter.ISO_DATE);
         String nombre = tfNombre.getText();
         String nacionalidad = cbNacionalidad.getSelectedItem().toString();
@@ -158,8 +178,32 @@ public class FAutor extends javax.swing.JFrame {
         autor01.setNacionalidad(nacionalidad);
         autor01.setNombre(nombre);
         
-        JOptionPane.showMessageDialog(this,"Se creo el objeto autor: " + autor01.toString());
+        try { // Se crea limpia los campos de la informacion suministrada
+            tfFecha.setText("");
+            tfNombre.setText("");
+            
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(autor01.getNombre() + ".aut"));
+            salida.writeObject(autor01);
+            salida.close();
+            JOptionPane.showMessageDialog(this, autor01.toString());
+        } catch (IOException ex){
+            JOptionPane.showMessageDialog(this, "Error: " + ex);
+        }
+        
     }//GEN-LAST:event_bGardarActionPerformed
+
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+        try {
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(tfNombre.getText() + ".aut"));
+            
+            autor01 = (Autor) entrada.readObject();
+            entrada.close();
+            tfFecha.setText("" + autor01.getNacimiento());
+      
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(this, "Error: " + ex);
+        }
+    }//GEN-LAST:event_bBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +241,7 @@ public class FAutor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bGardar;
     private javax.swing.JButton bSalir;
     private javax.swing.JComboBox<String> cbNacionalidad;
