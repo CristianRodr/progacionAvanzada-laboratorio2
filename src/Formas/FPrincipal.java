@@ -27,6 +27,7 @@ public class FPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         mbPrincipal = new javax.swing.JMenuBar();
         mBasica = new javax.swing.JMenu();
         miAutor = new javax.swing.JMenuItem();
@@ -36,6 +37,10 @@ public class FPrincipal extends javax.swing.JFrame {
         mAcerca = new javax.swing.JMenu();
         miAyuda = new javax.swing.JMenuItem();
         miAcercade = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        miSalir = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal de la Biblioteca UNIR Colombia");
@@ -80,6 +85,15 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
         mAcerca.add(miAcercade);
+        mAcerca.add(jSeparator1);
+
+        miSalir.setText("jMenuItem2");
+        miSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSalirActionPerformed(evt);
+            }
+        });
+        mAcerca.add(miSalir);
 
         mbPrincipal.add(mAcerca);
 
@@ -100,7 +114,7 @@ public class FPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutorActionPerformed
-        // TODO add your handling code here:
+        new FAutor().setVisible(true);
     }//GEN-LAST:event_miAutorActionPerformed
 
     private void miAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAyudaActionPerformed
@@ -110,6 +124,10 @@ public class FPrincipal extends javax.swing.JFrame {
     private void miAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAcercadeActionPerformed
         new fAcercade().setVisible(true);
     }//GEN-LAST:event_miAcercadeActionPerformed
+
+    private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +165,8 @@ public class FPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mAcerca;
     private javax.swing.JMenu mBasica;
     private javax.swing.JMenu mEjecucion;
@@ -156,5 +176,6 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAyuda;
     private javax.swing.JMenuItem miLector;
     private javax.swing.JMenuItem miLibro;
+    private javax.swing.JMenuItem miSalir;
     // End of variables declaration//GEN-END:variables
 }
